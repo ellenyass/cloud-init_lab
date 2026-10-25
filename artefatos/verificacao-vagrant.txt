@@ -1,0 +1,10 @@
+Vagrant up + reload — 25/10/2026
+
+cloud-init status: done (errors: [])
+id meu-usuario: groups sudo, docker
+nginx: active
+docker: active
+HTTP guest localhost: 200
+HTTP host http://127.0.0.1:2200/: 200
+
+Nota: Vagrant reportou colisão na porta 8080; HTTP está em 2200 (guest 80).

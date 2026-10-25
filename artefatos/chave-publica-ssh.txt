@@ -1,0 +1,6 @@
+Chave pública SSH (meu-usuario@cloud-init-lab)
+Gerada no Windows com: ssh-keygen -t ed25519
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGjQjd6wP46mz2agZ2UcRgEOOM8U1HDc/Ir9opV31tdl meu-usuario@cloud-init-lab
+
+A chave privada permanece em %USERPROFILE%\.ssh\id_ed25519 (não versionar nem compartilhar).

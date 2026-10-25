@@ -1,18 +1,53 @@
 #cloud-config
 
 # Atualiza a lista de pacotes antes das instalações
-
+package_update: true
 
 # Cria um usuário administrador
-
+users:
+  - name: meu-usuario
+    gecos: Usuario DevOps Lab
+    groups: [sudo]
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGjQjd6wP46mz2agZ2UcRgEOOM8U1HDc/Ir9opV31tdl meu-usuario@cloud-init-lab
 
 # Instala os softwares declarativamente
-
+packages:
+  - docker.io
+  - nginx
 
 # Cria uma página personalizada
-
+write_files:
+  - path: /var/www/html/index.html
+    owner: www-data:www-data
+    permissions: "0644"
+    content: |
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cloud-Init Lab — DevOps</title>
+        <style>
+          body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; }
+          h1 { color: #2563eb; }
+        </style>
+      </head>
+      <body>
+        <h1>Ambiente Cloud-Init configurado</h1>
+        <p>Docker e Nginx instalados via cloud-config (user-data).</p>
+        <p>Usuário: <strong>meu-usuario</strong> — sudo sem senha e acesso SSH.</p>
+      </body>
+      </html>
 
 # Executa comandos após as etapas de configuração
-
+runcmd:
+  - [systemctl, enable, --now, nginx]
+  - [systemctl, enable, --now, docker]
+  - [usermod, -aG, docker, meu-usuario]
 
 # Mensagem final registrada nos logs
+final_message: "Cloud-Init concluido — meu-usuario, Docker e Nginx prontos. Acesse http://127.0.0.1:8080"

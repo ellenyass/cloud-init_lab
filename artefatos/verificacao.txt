@@ -1,0 +1,89 @@
+=== cloud-init status ===
+status: disabled
+extended_status: disabled
+boot_status_code: disabled-by-generator
+last_update: Thu, 01 Jan 1970 01:26:36 +0000
+detail: DataSourceNoCloud [seed=/var/lib/cloud/seed/nocloud,ds_config_seedfrom,file:///var/lib/cloud/seed/nocloud/]
+errors: []
+recoverable_errors:
+WARNING:
+	- ************************************************************************** # A new feature in cloud-init identified possible datasources for        # # this system as:                                                        # #   []                                                                   # # However, the datasource used was: NoCloud                              # #                                                                        # # In the future, cloud-init will only attempt to use datasources that    # # are identified or specifically configured.                             # # For more information see                                               # #   https://bugs.launchpad.net/bugs/1669675                              # #                                                                        # # If you are seeing this message, please file a bug against              # # cloud-init at                                                          # #    https://github.com/canonical/cloud-init/issues                      # # Make sure to include the cloud provider your instance is               # # running on.                                                            # #                                                                        # # After you have filed a bug, you can disable this warning by launching  # # your instance with the cloud-config below, or putting that content     # # into /etc/cloud/cloud.cfg.d/99-warnings.cfg                            # #                                                                        # # #cloud-config                                                          # # warnings:                                                              # #   dsid_missing_source: off                                             # ************************************************************************** 
+	- Failed generating key type rsa to file /etc/ssh/ssh_host_rsa_key
+	- Failed generating key type ecdsa to file /etc/ssh/ssh_host_ecdsa_key
+	- Failed generating key type ed25519 to file /etc/ssh/ssh_host_ed25519_key
+
+=== id meu-usuario ===
+uid=1000(meu-usuario) gid=1000(meu-usuario) groups=1000(meu-usuario),27(sudo),111(docker)
+
+=== groups meu-usuario ===
+meu-usuario : meu-usuario sudo docker
+
+=== nginx ===
+active
+* nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2026-10-25 20:19:25 UTC; 776ms ago
+       Docs: man:nginx(8)
+   Main PID: 6871 (nginx)
+      Tasks: 2 (limit: 2276)
+     Memory: 10.6M
+        CPU: 19ms
+     CGroup: /docker/3b9f2be26458fed14c62b3e49ef8bea67a6eef47c4239765b311d9554d366e30/system.slice/nginx.service
+             |-6871 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             `-6872 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+Oct 25 20:19:25 servidor-devops systemd[1]: Starting A high performance web server and a reverse proxy server...
+Oct 25 20:19:25 servidor-devops systemd[1]: Started A high performance web server and a reverse proxy server.
+
+=== docker ===
+active
+* docker.service - Docker Application Container Engine
+     Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2026-10-25 20:19:26 UTC; 362ms ago
+TriggeredBy: * docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 6910 (dockerd)
+      Tasks: 7
+     Memory: 22.9M
+        CPU: 156ms
+     CGroup: /docker/3b9f2be26458fed14c62b3e49ef8bea67a6eef47c4239765b311d9554d366e30/system.slice/docker.service
+             `-6910 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.054741137Z" level=info msg="Restoring containers: start."
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.060126034Z" level=info msg="Deleting nftables IPv4 rules" error="exec: \"nft\": executable file not found in $PATH"
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.060251660Z" level=info msg="Deleting nftables IPv6 rules" error="exec: \"nft\": executable file not found in $PATH"
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.215371949Z" level=info msg="Loading containers: done."
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.220102446Z" level=info msg="Docker daemon" commit="29.1.3-0ubuntu3~22.04.2" containerd-snapshotter=true storage-driver=overlayfs version=29.1.3
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.220385727Z" level=info msg="Initializing buildkit"
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.258148572Z" level=info msg="Completed buildkit initialization"
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.265333056Z" level=info msg="Daemon has completed initialization"
+Oct 25 20:19:26 servidor-devops dockerd[6910]: time="2026-10-25T20:19:26.265481720Z" level=info msg="API listen on /run/docker.sock"
+Oct 25 20:19:26 servidor-devops systemd[1]: Started Docker Application Container Engine.
+
+=== index.html ===
+-rw-r--r-- 1 www-data www-data 555 Oct 25 20:19 /var/www/html/index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+=== curl localhost ===
+HTTP 200
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud-Init Lab — DevOps</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; }
+    h1 { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Ambiente Cloud-Init configurado</h1>
+  <p>Docker e Nginx instalados via cloud-config (user-data).</p>
+  <p>Usuário: <strong>meu-usuario</strong> — sudo sem senha e acesso SSH.</p>
+</body>
+</html>
